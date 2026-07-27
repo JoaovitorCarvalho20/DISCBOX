@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Fundo / Base da Caixa (Box) -->
+  <rect x="64" y="64" width="384" height="384" rx="80" fill="#2A3D45" />
+
+  <!-- Detalhe Interno da Caixa (Abertura Retro) -->
+  <rect x="96" y="96" width="320" height="320" rx="48" fill="#1E2B30" />
+
+  <!-- Disco de Vinil (Disc) saindo da caixa -->
+  <g transform="translate(0, 0)">
+    <!-- Corpo do Disco -->
+    <circle cx="256" cy="256" r="120" fill="#111111" />
+    <!-- Ranhuras do Vinil -->
+    <circle cx="256" cy="256" r="100" fill="none" stroke="#222222" stroke-width="4" />
+    <circle cx="256" cy="256" r="80" fill="none" stroke="#222222" stroke-width="3" />
+    <!-- Rótulo Central (Retro) -->
+    <circle cx="256" cy="256" r="45" fill="#E65100" />
+    <!-- Furo Central -->
+    <circle cx="256" cy="256" r="14" fill="#1E2B30" />
+  </g>
+
+  <!-- Detalhes de Cores Retro (Top-Right Stripes) -->
+  <path d="M340 96 H384 V140 Z" fill="#F4A261" />
+  <path d="M300 96 H330 V126 Z" fill="#E76F51" />
+</svg>

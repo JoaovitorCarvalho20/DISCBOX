@@ -1,0 +1,5 @@
+yt-dlp
+requests
+mutagen
+PyQt6
+python-dotenv

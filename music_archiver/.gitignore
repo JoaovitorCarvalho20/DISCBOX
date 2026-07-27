@@ -1,0 +1,16 @@
+.venv/
+.env
+downloads/
+__pycache__/
+*.pyc
+.gui_settings.json
+.claude
+
+# Artefatos de build (gerados por `pyinstaller discbox.spec`)
+build/
+dist/
+vendor/
+*.spec.bak
+
+# Binário do FFmpeg baixado pelos scripts/build_*, embutido no build
+vendor/ffmpeg/
