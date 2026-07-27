@@ -1,0 +1,23 @@
+# Ambiente virtual
+.venv/
+
+# Configuração local
+.env
+
+# Downloads (saída do app rodando a partir do código-fonte)
+downloads/
+
+# Build
+build/
+dist/
+vendor/
+*.spec.bak
+
+# Python
+__pycache__/
+*.pyc
+
+# Editores/SO
+.vscode/
+.DS_Store
+Thumbs.db

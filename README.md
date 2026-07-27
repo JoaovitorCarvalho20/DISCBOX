@@ -1,5 +1,3 @@
-perfeito 
-
 # DISCBOX
 
 Baixador de músicas do Spotify: você cola a URL de uma faixa, álbum ou playlist, o DISCBOX lê os metadados (título, artista, álbum, capa) direto da Spotify, encontra o áudio correspondente no YouTube, baixa, converte e grava tudo — tags e capa incluídas — no formato que você escolher.
@@ -8,7 +6,7 @@ Não precisa de conta de desenvolvedor da Spotify, nem de Client ID/Secret, nem 
 
 ## Baixar e usar (sem instalar nada)
 
-Se alguém já te passou o executável pronto (`DISCBOX.exe` no Windows, `DISCBOX.app` no macOS, ou `DISCBOX` no Linux), é só baixar e abrir — não precisa instalar Python, e o FFmpeg já vem embutido dentro do app.
+Pegue a versão mais recente na página de **[Releases](https://github.com/JoaovitorCarvalho20/DISCBOX/releases)** — baixe o executável do seu sistema (`DISCBOX.exe` no Windows, `DISCBOX.app` no macOS, ou `DISCBOX` no Linux) e abra direto. Não precisa instalar Python, e o FFmpeg já vem embutido dentro do app.
 
 Se em vez disso você tem o código-fonte e quer gerar esse executável você mesmo, veja [Gerando o executável](#gerando-o-executável) mais abaixo.
 
