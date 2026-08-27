@@ -34,14 +34,6 @@ Não precisa instalar Python nem FFmpeg separadamente — já vem tudo dentro do
   <img src="assets/screenshot.png" width="640" alt="Tela do DISCBOX mostrando o campo para colar o link do Spotify">
 </p>
 
-## Perguntas frequentes
-
-- **Preciso saber programar ou mexer no terminal?** Não — só se você quiser rodar a partir do código-fonte (seção [mais abaixo](#rodando-a-partir-do-código-fonte)) em vez do programa pronto.
-- **Custa alguma coisa ou pede login?** Não. Não precisa de conta na Spotify nem em nenhum outro serviço.
-- **É seguro?** O código é aberto — qualquer pessoa pode ler exatamente o que o programa faz (veja [Como funciona](#como-funciona) abaixo).
-- **Funciona no meu computador?** Sim, tem versão pronta pra Windows, Mac e Linux na página de [Releases](https://github.com/JoaovitorCarvalho20/DISCBOX/releases).
-- **Baixar música assim é permitido?** Veja o [Aviso](#aviso) no final desta página antes de usar.
-
 ---
 
 A partir daqui as seções são mais técnicas — pra quem quer entender como o programa funciona por dentro ou rodar a partir do código-fonte.
