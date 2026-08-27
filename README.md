@@ -1,14 +1,50 @@
-# DISCBOX
+<p align="center">
+  <img src="assets/icon.png" width="120" alt="Logo do DISCBOX">
+</p>
 
-Baixador de músicas do Spotify: você cola a URL de uma faixa, álbum ou playlist, o DISCBOX lê os metadados (título, artista, álbum, capa) direto da Spotify, encontra o áudio correspondente no YouTube, baixa, converte e grava tudo — tags e capa incluídas — no formato que você escolher.
+<h1 align="center">DISCBOX</h1>
 
-Não precisa de conta de desenvolvedor da Spotify, nem de Client ID/Secret, nem de login. Também não usa nenhuma API paga ou mirror de terceiros — só a própria página pública que o player incorporado da Spotify usa.
+<p align="center">
+  Baixe suas músicas do Spotify pro seu computador — cola o link, clica em baixar, pronto.
+</p>
 
-## Baixar e usar (sem instalar nada)
+Você cola o link de uma faixa, álbum ou playlist do Spotify, e o DISCBOX cuida do resto: encontra o áudio, baixa, converte pro formato que você quiser (MP3, FLAC, etc.) e já salva com o título, artista e capa do álbum certinhos — igual você veria no Spotify.
 
-Pegue a versão mais recente na página de **[Releases](https://github.com/JoaovitorCarvalho20/DISCBOX/releases)** — baixe o executável do seu sistema (`DISCBOX.exe` no Windows, `DISCBOX.app` no macOS, ou `DISCBOX` no Linux) e abra direto. Não precisa instalar Python, e o FFmpeg já vem embutido dentro do app.
+Não precisa criar conta, fazer login nem pagar nada. É só baixar o programa e usar.
 
-Se em vez disso você tem o código-fonte e quer gerar esse executável você mesmo, veja [Gerando o executável](#gerando-o-executável) mais abaixo.
+## Baixar e instalar (não precisa saber programar)
+
+1. Vá até a página de **[Releases](https://github.com/JoaovitorCarvalho20/DISCBOX/releases)** e clique na versão mais recente lá no topo.
+2. Na lista de arquivos, baixe o que combina com o seu computador:
+   - **Windows** → `DISCBOX-windows.zip`
+   - **Mac** → `DISCBOX-macos.zip`
+   - **Linux** → `DISCBOX-linux.tar.gz`
+3. Descompacte o arquivo baixado (clique com o botão direito → "Extrair tudo" no Windows, ou dê dois cliques no Mac) e abra o `DISCBOX` que aparecer dentro da pasta.
+
+Não precisa instalar Python nem FFmpeg separadamente — já vem tudo dentro do programa.
+
+### Como usar
+
+1. Copie o link da música, álbum ou playlist do Spotify (no app ou site da Spotify: `⋯` → **Compartilhar** → **Copiar link**).
+2. Cole o link no DISCBOX e clique em **Buscar** — ele mostra a capa e a lista de faixas antes de baixar qualquer coisa.
+3. Se quiser, ajuste a pasta de destino e o formato/qualidade do áudio na aba **Configurações**.
+4. Clique em **Baixar** e aguarde a barra de progresso terminar.
+
+<p align="center">
+  <img src="assets/screenshot.png" width="640" alt="Tela do DISCBOX mostrando o campo para colar o link do Spotify">
+</p>
+
+## Perguntas frequentes
+
+- **Preciso saber programar ou mexer no terminal?** Não — só se você quiser rodar a partir do código-fonte (seção [mais abaixo](#rodando-a-partir-do-código-fonte)) em vez do programa pronto.
+- **Custa alguma coisa ou pede login?** Não. Não precisa de conta na Spotify nem em nenhum outro serviço.
+- **É seguro?** O código é aberto — qualquer pessoa pode ler exatamente o que o programa faz (veja [Como funciona](#como-funciona) abaixo).
+- **Funciona no meu computador?** Sim, tem versão pronta pra Windows, Mac e Linux na página de [Releases](https://github.com/JoaovitorCarvalho20/DISCBOX/releases).
+- **Baixar música assim é permitido?** Veja o [Aviso](#aviso) no final desta página antes de usar.
+
+---
+
+A partir daqui as seções são mais técnicas — pra quem quer entender como o programa funciona por dentro ou rodar a partir do código-fonte.
 
 ## Como funciona
 
