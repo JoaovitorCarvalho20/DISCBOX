@@ -1,8 +1,10 @@
 """Leitura de metadados públicos da Spotify via páginas de embed.
 
-Mesma técnica usada pelo Sunnify: a página `open.spotify.com/embed/{tipo}/{id}`
-carrega um bloco JSON (`__NEXT_DATA__`) com título, artistas, álbum, capa e
-duração das faixas, sem precisar de Client ID/Secret nem de login.
+A página `open.spotify.com/embed/{tipo}/{id}` — a mesma que a Spotify usa
+pra gerar o player incorporado em sites de terceiros — carrega um bloco
+JSON (`__NEXT_DATA__`) com título, artistas, álbum, capa e duração das
+faixas. Como é uma página pública, dá pra ler tudo isso sem precisar de
+Client ID/Secret nem de login.
 """
 
 from __future__ import annotations

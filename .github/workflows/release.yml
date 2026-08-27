@@ -1,0 +1,121 @@
+# Gera os três executáveis (Windows/macOS/Linux) e publica na aba Releases.
+#
+# PyInstaller não faz cross-compile (cada SO só empacota pra si mesmo), então
+# em vez de depender de alguém rodar scripts/build_*.{ps1,sh} manualmente nos
+# três sistemas, este workflow usa os runners do próprio GitHub Actions
+# (um Windows, um macOS, um Linux) pra fazer os três builds em paralelo.
+#
+# Como disparar:
+#   - Automático: dê push numa tag no formato v1.0.0 (cria/atualiza o release
+#     dessa tag com os três instaladores anexados).
+#   - Manual: aba Actions > "Build e Release" > "Run workflow" (builda os
+#     três, mas sem publicar em nenhum release — útil pra testar o workflow).
+
+name: Build e Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            plataforma: windows
+          - os: macos-latest
+            plataforma: macos
+          - os: ubuntu-latest
+            plataforma: linux
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # FFmpeg embutido no executável final (ver discbox.spec) — assim quem
+      # baixa o app não precisa instalar nada separado.
+      - name: Instalar FFmpeg (Windows)
+        if: matrix.plataforma == 'windows'
+        run: choco install ffmpeg -y
+
+      - name: Instalar FFmpeg (macOS)
+        if: matrix.plataforma == 'macos'
+        run: brew install ffmpeg
+
+      - name: Instalar FFmpeg (Linux)
+        if: matrix.plataforma == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Instalar dependências do projeto
+        run: python -m pip install -r requirements-build.txt
+
+      - name: Copiar FFmpeg para vendor/ffmpeg (Windows)
+        if: matrix.plataforma == 'windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path vendor/ffmpeg | Out-Null
+          Copy-Item (Get-Command ffmpeg).Source vendor/ffmpeg/ffmpeg.exe -Force
+
+      - name: Copiar FFmpeg para vendor/ffmpeg (macOS/Linux)
+        if: matrix.plataforma != 'windows'
+        run: |
+          mkdir -p vendor/ffmpeg
+          cp "$(command -v ffmpeg)" vendor/ffmpeg/ffmpeg
+
+      - name: Empacotar com PyInstaller
+        run: python -m PyInstaller discbox.spec --noconfirm --clean
+
+      # Cada SO produz um formato diferente em dist/ (ver discbox.spec):
+      # DISCBOX.exe no Windows, DISCBOX.app no macOS, DISCBOX no Linux.
+      # Aqui cada um vira um único arquivo compactado pra anexar no release.
+      - name: Compactar (Windows)
+        if: matrix.plataforma == 'windows'
+        shell: pwsh
+        run: Compress-Archive -Path dist/DISCBOX.exe -DestinationPath DISCBOX-windows.zip
+
+      - name: Compactar (macOS)
+        if: matrix.plataforma == 'macos'
+        run: ditto -c -k --sequesterRsrc --keepParent dist/DISCBOX.app DISCBOX-macos.zip
+
+      - name: Compactar (Linux)
+        if: matrix.plataforma == 'linux'
+        run: |
+          chmod +x dist/DISCBOX
+          tar -czf DISCBOX-linux.tar.gz -C dist DISCBOX
+
+      - name: Guardar artefato do build
+        uses: actions/upload-artifact@v4
+        with:
+          name: DISCBOX-${{ matrix.plataforma }}
+          path: DISCBOX-${{ matrix.plataforma }}.*
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Baixar os três builds
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Publicar release com os três instaladores
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: artifacts/**/DISCBOX-*
+          generate_release_notes: true

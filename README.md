@@ -96,7 +96,22 @@ Na GUI, a última pasta/formato/qualidade escolhidos ficam salvos e voltam pré-
 
 ## Gerando o executável
 
-O build usa [PyInstaller](https://pyinstaller.org/) pra empacotar o app + Python + FFmpeg num único executável. **PyInstaller não faz cross-compile** — rode o script do seu próprio sistema operacional pra gerar o build dele (quem quiser os três, precisa rodar em cada um dos três SOs).
+O build usa [PyInstaller](https://pyinstaller.org/) pra empacotar o app + Python + FFmpeg num único executável. **PyInstaller não faz cross-compile** — o build de cada sistema só pode ser gerado rodando naquele sistema.
+
+### Automático (GitHub Actions)
+
+O workflow [`.github/workflows/release.yml`](.github/workflows/release.yml) builda os três sistemas em paralelo — um runner Windows, um macOS e um Linux do próprio GitHub Actions — e publica os três instaladores direto na aba **[Releases](https://github.com/JoaovitorCarvalho20/DISCBOX/releases)**. É assim que os builds oferecidos pra download são gerados; não depende de ninguém ter uma máquina Windows/Mac/Linux pra rodar os scripts manuais abaixo.
+
+Pra publicar uma versão nova: dê push numa tag `vX.Y.Z`, por exemplo:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+O workflow também pode ser disparado manualmente pela aba **Actions → Build e Release → Run workflow** (builda os três, mas sem criar/atualizar um release — útil só pra testar se o build passa).
+
+### Manual (rodando localmente)
 
 ```bash
 # Windows (PowerShell)
@@ -114,8 +129,6 @@ Cada script cria/usa o `.venv`, instala as dependências de build (`requirements
 - Windows: `dist\DISCBOX.exe`
 - macOS: `dist/DISCBOX.app`
 - Linux: `dist/DISCBOX`
-
-Só testei de fato o build do Windows — os scripts de macOS/Linux seguem o mesmo padrão mas não tive como rodar/validar neles.
 
 ## Estrutura do projeto
 

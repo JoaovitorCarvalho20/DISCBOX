@@ -1,10 +1,12 @@
 """Busca no YouTube pela melhor correspondência de áudio para uma faixa da Spotify.
 
-Lógica adaptada do Sunnify: busca vários resultados (não só o primeiro, que
-pode estar bloqueado por região), filtra por título plausível, depois por
-artista, e entre os candidatos restantes escolhe o de duração mais próxima —
-rejeitando o resultado se mesmo o mais próximo estiver muito longe da duração
-esperada (evita baixar remix/live/cover no lugar da faixa original).
+Como a Spotify só entrega metadados (não o áudio), cada faixa precisa de uma
+busca equivalente no YouTube. A estratégia: pega vários resultados (não só o
+primeiro, que pode estar bloqueado por região ou ser a faixa errada), filtra
+por título plausível, depois por artista, e entre os candidatos restantes
+escolhe o de duração mais próxima — rejeitando o resultado se mesmo o mais
+próximo estiver muito longe da duração esperada (evita baixar remix/live/cover
+no lugar da faixa original).
 """
 
 from __future__ import annotations
